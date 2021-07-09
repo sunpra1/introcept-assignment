@@ -1,16 +1,15 @@
 import React from 'react';
-import { useContext } from 'react/cjs/react.development';
-import { AppContext } from '../../context/App';
 import ListItem from './ListItem';
 
-export default function List() {
+export default function List(props) {
 
-    let { data } = useContext(AppContext);
+    console.log(props);
+    let { data } = props;
 
     return (
-        <div className="list-group">
+        <div className="list-group rounded-0">
             {
-                data.map((item, index) => <ListItem value={data[index]} />)
+                data.map((item, index) => <ListItem key={index} value={data[index]} />)
             }
         </div>
     );
