@@ -20,13 +20,11 @@ Then("User press add button to add new record", async () => {
 });
 
 Then("New record details is displayed in list", async () => {
-    console.log("start 4");
     await driver.sleep(1500);
     await driver.findElement(By.id('navHomeLink')).click();
     await driver.wait(until.urlIs("http://localhost:3000/"));
     const expectedValue = await driver.findElement(By.css(".list-group .list-group-item:last-child h6")).getText();
     expect(expectedValue).to.be.equal("Sunil Prasai");
-    console.log("end 4");
 });
 
 After(async () => {
