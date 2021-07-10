@@ -41,8 +41,9 @@ export default function AddRecord(props) {
         }
     }
 
-    function addRecord() {
-        if (validate()) {            
+    function addRecord(e) {
+        e.preventDefault();
+        if (validate()) {
             add({ name, phoneNumber, country, favouritePhoneBrand });
             props.history.goBack();
         }
@@ -129,7 +130,7 @@ export default function AddRecord(props) {
                 }
                 break;
             }
-                
+
             case "country": {
                 if (Validator.isEmpty(value)) {
                     error = "Country is required";
@@ -158,61 +159,62 @@ export default function AddRecord(props) {
             <div className="container-fluid">
                 <div className="row my-4">
                     <div className="col-md-6 mx-auto p-5 box-shadow">
-                        <p className="text-danger font-small">FIELD MARKED WITH ASTERISK (<span><FontAwesomeIcon className="text-danger asterisk" icon={faAsterisk} /></span>) ARE REQUIRED</p>
+                        <form onSubmit={addRecord}>
+                            <p className="text-danger font-small">FIELD MARKED WITH ASTERISK (<span><FontAwesomeIcon className="text-danger asterisk" icon={faAsterisk} /></span>) ARE REQUIRED</p>
 
-                        <div className="form-group">
-                            <label htmlFor="nameInput" className="text-info">NAME <FontAwesomeIcon className="text-danger m-1 asterisk" icon={faAsterisk} /></label>
-                            <div className="input-group">
-                                <span className="input-group-text  rounded-0" id="inputGroupPrepend"> <FontAwesomeIcon icon={faUser} /> </span>
-                                <input id="nameInput" type="text" value={name} onFocus={handleInputFieldFocus} onChange={handleChange} onBlur={handleInputFieldBlur} name="name" placeholder="PROVIDE NAME" className={"form-control rounded-0 " + (errors.name && "is-invalid")} autoComplete="off" />
-                                <div className="invalid-feedback">
-                                    <span>{errors.name}</span>
+                            <div className="form-group">
+                                <label htmlFor="nameInput" className="text-info">NAME <FontAwesomeIcon className="text-danger m-1 asterisk" icon={faAsterisk} /></label>
+                                <div className="input-group">
+                                    <span className="input-group-text  rounded-0" id="inputGroupPrepend"> <FontAwesomeIcon icon={faUser} /> </span>
+                                    <input id="nameInput" type="text" value={name} onFocus={handleInputFieldFocus} onChange={handleChange} onBlur={handleInputFieldBlur} name="name" placeholder="PROVIDE NAME" className={"form-control rounded-0 " + (errors.name && "is-invalid")} autoComplete="off" />
+                                    <div className="invalid-feedback">
+                                        <span>{errors.name}</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div className="form-group mt-4">
-                            <label htmlFor="phoneNumberInput" className="text-info">PHONE NUMBER <FontAwesomeIcon className="text-danger m-1 asterisk" icon={faAsterisk} /></label>
-                            <div className="input-group">
-                                <span className="input-group-text  rounded-0" id="inputGroupPrepend"> <FontAwesomeIcon icon={faPhone} /> </span>
-                                <input id="phoneNumberInput" type="number" value={phoneNumber} onFocus={handleInputFieldFocus} onChange={handleChange} onBlur={handleInputFieldBlur} name="phoneNumber" placeholder="PROVIDE PHONE NUMBER" className={"form-control rounded-0 " + (errors.phoneNumber && "is-invalid")} autoComplete="off" />
-                                <div className="invalid-feedback">
-                                    <span>{errors.phoneNumber}</span>
+                            <div className="form-group mt-4">
+                                <label htmlFor="phoneNumberInput" className="text-info">PHONE NUMBER <FontAwesomeIcon className="text-danger m-1 asterisk" icon={faAsterisk} /></label>
+                                <div className="input-group">
+                                    <span className="input-group-text  rounded-0" id="inputGroupPrepend"> <FontAwesomeIcon icon={faPhone} /> </span>
+                                    <input id="phoneNumberInput" type="number" value={phoneNumber} onFocus={handleInputFieldFocus} onChange={handleChange} onBlur={handleInputFieldBlur} name="phoneNumber" placeholder="PROVIDE PHONE NUMBER" className={"form-control rounded-0 " + (errors.phoneNumber && "is-invalid")} autoComplete="off" />
+                                    <div className="invalid-feedback">
+                                        <span>{errors.phoneNumber}</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div className="form-group mt-4">
-                            <label htmlFor="countryInput" className="text-info">COUNTRY <FontAwesomeIcon className="text-danger m-1 asterisk" icon={faAsterisk} /></label>
-                            <div className="input-group">
-                                <span className="input-group-text  rounded-0" id="inputGroupPrepend"> <FontAwesomeIcon icon={faMap} /> </span>
-                                <select id="countryInput" type="number" value={country} onFocus={handleInputFieldFocus} onChange={handleChange} onBlur={handleInputFieldBlur} name="country" className={"form-control rounded-0 " + (errors.country && "is-invalid")} autoComplete="off">
-                                    <option value="0" key="0" disabled>SELECT COUNTRY</option>
-                                    {
-                                        countries.map((element, index) => <option key={index} value={element} >{element}</option>)
-                                    }
-                                </select>
-                                <div className="invalid-feedback">
-                                    <span>{errors.country}</span>
+                            <div className="form-group mt-4">
+                                <label htmlFor="countryInput" className="text-info">COUNTRY <FontAwesomeIcon className="text-danger m-1 asterisk" icon={faAsterisk} /></label>
+                                <div className="input-group">
+                                    <span className="input-group-text  rounded-0" id="inputGroupPrepend"> <FontAwesomeIcon icon={faMap} /> </span>
+                                    <select id="countryInput" type="number" value={country} onFocus={handleInputFieldFocus} onChange={handleChange} onBlur={handleInputFieldBlur} name="country" className={"form-control rounded-0 " + (errors.country && "is-invalid")} autoComplete="off">
+                                        <option value="0" key="0" disabled>SELECT COUNTRY</option>
+                                        {
+                                            countries.map((element, index) => <option key={index} value={element} >{element}</option>)
+                                        }
+                                    </select>
+                                    <div className="invalid-feedback">
+                                        <span>{errors.country}</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div className="form-group mt-4">
-                            <label htmlFor="favouritePhoneBrandInput" className="text-info">FAVOURITE PHONE BRAND <FontAwesomeIcon className="text-danger m-1 asterisk" icon={faAsterisk} /></label>
-                            <div className="input-group">
-                                <span className="input-group-text  rounded-0" id="inputGroupPrepend"> <FontAwesomeIcon icon={faMobile} /> </span>
-                                <input id="favouritePhoneBrandInput" type="text" value={favouritePhoneBrand} onFocus={handleInputFieldFocus} onChange={handleChange} onBlur={handleInputFieldBlur} name="favouritePhoneBrand" placeholder="PROVIDE FAVOURITE PHONE BRAND" className={"form-control rounded-0 " + (errors.favouritePhoneBrand && "is-invalid")} autoComplete="off" />
-                                <div className="invalid-feedback">
-                                    <span>{errors.favouritePhoneBrand}</span>
+                            <div className="form-group mt-4">
+                                <label htmlFor="favouritePhoneBrandInput" className="text-info">FAVOURITE PHONE BRAND <FontAwesomeIcon className="text-danger m-1 asterisk" icon={faAsterisk} /></label>
+                                <div className="input-group">
+                                    <span className="input-group-text  rounded-0" id="inputGroupPrepend"> <FontAwesomeIcon icon={faMobile} /> </span>
+                                    <input id="favouritePhoneBrandInput" type="text" value={favouritePhoneBrand} onFocus={handleInputFieldFocus} onChange={handleChange} onBlur={handleInputFieldBlur} name="favouritePhoneBrand" placeholder="PROVIDE FAVOURITE PHONE BRAND" className={"form-control rounded-0 " + (errors.favouritePhoneBrand && "is-invalid")} autoComplete="off" />
+                                    <div className="invalid-feedback">
+                                        <span>{errors.favouritePhoneBrand}</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div className="col mt-4 d-flex">
-                            <button onClick={addRecord} className="btn btn-success rounded-0 mx-auto px-4"><FontAwesomeIcon icon={faPlus} /> ADD</button>
-                        </div>
-
+                            <div className="col mt-4 d-flex">
+                                <button id="addNewRecord" type="submit" onClick={addRecord} className="btn btn-success rounded-0 mx-auto px-4"><FontAwesomeIcon icon={faPlus} /> ADD</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
