@@ -42,7 +42,7 @@ export default function Home() {
                         <Link to="/add" className="btn btn-success float-end rounded-0"> <FontAwesomeIcon icon={faPlus} /> ADD RECORD</Link>
                     </div>
 
-                    <div className="col-md-12 my-4">
+                    <div className="col-md-10 mx-auto p-5 box-shadow my-4">
                         <List data={data}  />
                     </div>
                 </div>
